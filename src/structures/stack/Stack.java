@@ -1,34 +1,42 @@
 package structures.stack;
 
-public class Stack implements StackInterface{
-   private int[] stack;
+public class Stack<T> implements StackInterface<T>{
+   private Object[] stack;
    private int top;
    private int size;
 
    public Stack(int size) {
       this.size = size;
-      this.stack = new int[size];
+      this.stack = new Object[size];
       this.top = -1;
    }
 
-   public void push(int value) {
+   public void push(T value) {
       if (!isFull()) {
          stack[++top] = value;
+      } else {
+         System.out.println("Error: Stack overflow");
       }
    }
 
-   public int pop() {
+   @SuppressWarnings("unchecked")
+   public T pop() {
       if (!isEmpty()) {
-         return stack[top--];
+         return (T) stack[top--];
+      } else {
+         System.out.println("Error: Stack underflow");
       }
-      return -1;
+      return null;
    }
 
-   public int peek() {
+   @SuppressWarnings("unchecked")
+   public T peek() {
       if (!isEmpty()) {
-         return stack[top];
+         return (T) stack[top];
+      } else {
+         System.out.println("Error: Stack underflow");
       }
-      return -1;
+      return null;
    }
 
    public boolean isEmpty() {
