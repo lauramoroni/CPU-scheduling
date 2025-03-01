@@ -11,32 +11,30 @@ public class Stack<T> implements StackInterface<T>{
       this.top = -1;
    }
 
-   public void push(T value) {
+   public void push(T value) throws Exception {
       if (!isFull()) {
          stack[++top] = value;
       } else {
-         System.out.println("Error: Stack overflow");
+         throw new Exception("Error: Stack overflow");
       }
    }
 
    @SuppressWarnings("unchecked")
-   public T pop() {
+   public T pop() throws Exception {
       if (!isEmpty()) {
          return (T) stack[top--];
       } else {
-         System.out.println("Error: Stack underflow");
+         throw new Exception("Error: Stack underflow");
       }
-      return null;
    }
 
    @SuppressWarnings("unchecked")
-   public T peek() {
+   public T peek() throws Exception {
       if (!isEmpty()) {
          return (T) stack[top];
       } else {
-         System.out.println("Error: Stack underflow");
+         throw new Exception("Error: Stack underflow");
       }
-      return null;
    }
 
    public boolean isEmpty() {
@@ -45,6 +43,12 @@ public class Stack<T> implements StackInterface<T>{
 
    public boolean isFull() {
       return top == size - 1;
+   }
+
+   public void show() {
+      for (int i = 0; i <= top; i++) {
+         System.out.println(stack[i].toString());
+      }
    }
 
 }
