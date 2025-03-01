@@ -1,6 +1,8 @@
 package structures.queue;
 
-public interface QueueInterface <Processes>{
+import entities.Processes;
+
+public interface QueueInterface {
     void add(Processes p) throws Exception;
 
     Processes remove() throws Exception;

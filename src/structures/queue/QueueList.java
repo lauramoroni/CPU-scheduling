@@ -2,7 +2,7 @@ package structures.queue;
 
 import entities.Processes;
 
-public class QueueList <Process> implements QueueInterface<Processes> {
+public class QueueList implements QueueInterface {
     class Node{ // intern node class to implement linked list
         Processes data;
         Node next;
@@ -103,7 +103,7 @@ public class QueueList <Process> implements QueueInterface<Processes> {
     public void show() throws Exception {
         Node p = head;
         while (p != null){
-            System.out.println(p.data.name);
+            System.out.println(p.data.getName());
             p = p.next;
         }
     }
