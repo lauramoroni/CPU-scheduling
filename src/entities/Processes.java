@@ -40,5 +40,9 @@ public class Processes {
    public void setPriority(int priority) {
       this.priority = priority;
    }
+
+   public String toString() {
+      return "Process ID: " + id + "\nArrival Time: " + arrivalTime + "\nBurst Time: " + burstTime + "\nPriority: " + priority + "\n";
+   }
   
 }
