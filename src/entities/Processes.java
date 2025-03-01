@@ -14,4 +14,5 @@ public class Processes {
       this.burstTime = burstTime;
       this.priority = priority;
   }
+  
 }
