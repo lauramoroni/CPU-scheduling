@@ -15,6 +15,9 @@ public class Processes {
       this.priority = priority;
   }
 
+   public String toString() {
+       return "PID: " + id + "\nName: " + name + "\nArrival Time: " + arrivalTime + "\nBurst Time: " + burstTime + "\nPriority: " + priority + "\n";
+   }
 
    public int getPriority() {
       return priority;
