@@ -4,6 +4,7 @@ import java.util.List;
 import entities.Processes;
 import schedulers.SJF;
 import structures.queue.QueueList;
+import utils.FileHandler;
 
 public class SchedulerSimulator {
     public static void main(String[] args) throws Exception {
@@ -50,5 +51,9 @@ public class SchedulerSimulator {
         }
         
         readyProcesses.show();
+
+        // escreve no arquivo
+        FileHandler fileHandler = new FileHandler();
+        FileHandler.writeFile("tests\\output\\output2.txt", readyProcesses, "SJF");
     }
 }
