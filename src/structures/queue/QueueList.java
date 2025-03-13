@@ -103,7 +103,7 @@ public class QueueList implements QueueInterface {
     public void show() throws Exception {
         Node p = head;
         while (p != null){
-            System.out.println(p.data.getName());
+            System.out.println(p.data.toString());
             p = p.next;
         }
     }

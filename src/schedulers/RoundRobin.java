@@ -1,8 +1,9 @@
-package algorithms;
+package schedulers;
 
 import java.util.List;
 
 import entities.Processes;
+import structures.queue.QueueList;
 
 public class RoundRobin implements Scheduler {
    public int quantum;
@@ -12,7 +13,9 @@ public class RoundRobin implements Scheduler {
    }
 
    @Override
-   public void scheduler(List<Processes> processes) {
+   public QueueList scheduler(List<Processes> processes) {
+      QueueList queue = new QueueList(processes.size());
+      return queue;
    }  
 }
 

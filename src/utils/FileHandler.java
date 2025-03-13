@@ -5,17 +5,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import entities.Processes;
-import structures.stack.Stack;
+import structures.queue.QueueList;
 
 public class FileHandler {
 
-    public static void writeFile(String path, Stack<Processes> processes, String scheduler) {
+    public static void writeFile(String path, QueueList processes, String scheduler) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write("Scheduler: " + scheduler);
             writer.newLine();
 
             while (!processes.isEmpty()) {
-                Processes process = processes.pop();
+                Processes process = processes.remove();
                 writer.write(process.toString());
                 writer.newLine();
             }
