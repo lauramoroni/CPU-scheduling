@@ -46,21 +46,11 @@ public class MergeSort {
       }
    }
 
-   private static void mergeSort(int[] param, int left, int right) {
-      if (left >= right) {
-         return;
-      } else {
-         int middle = (left + right) / 2;
-         mergeSort(param, left, middle);
-         mergeSort(param, middle + 1, right);
-         merge(param, left, middle, right);
-      }
-   }
 
-   private static void sortProcesses(Processes[] processes, int[] param) {
+   private static void sortProcessesByArrivalTime(Processes[] processes, int[] param) {
       for (int i = 0; i < processes.length; i++) {
          for (int j = 0; j < processes.length; j++) {
-            if (param[i] == processes[j].getBurstTime()) {
+            if (param[i] == processes[j].getArrivalTime()) {
                Processes aux = processes[i];
                processes[i] = processes[j];
                processes[j] = aux;
@@ -75,24 +65,61 @@ public class MergeSort {
          burstTime[i] = processes[i].getBurstTime();
       }
       mergeSort(burstTime, 0, burstTime.length - 1);
-      sortProcesses(processes, burstTime);
+      sortProcessesByBurstTime(processes, burstTime);
    }
 
    private static void mergePriority(Processes[] processes){
       int[] priority = new int[processes.length];
       for (int i = 0; i < processes.length; i++) {
-         priority[i] = processes[i].getBurstTime();
+         priority[i] = processes[i].getPriority();
       }
       mergeSort(priority, 0, priority.length - 1);
-      sortProcesses(processes, priority);
+      sortProcessesByPriority(processes, priority);
    }
 
     private static void mergeArrivalTime(Processes[] processes){
         int[] arrivalTime = new int[processes.length];
         for (int i = 0; i < processes.length; i++) {
-           arrivalTime[i] = processes[i].getBurstTime();
+           arrivalTime[i] = processes[i].getArrivalTime();
         }
         mergeSort(arrivalTime, 0, arrivalTime.length - 1);
-        sortProcesses(processes, arrivalTime);
+        sortProcessesByArrivalTime(processes, arrivalTime);
     }
+
+   private static void mergeSort(int[] param, int left, int right) {
+      if (left >= right) {
+         return;
+      } else {
+         int middle = (left + right) / 2;
+         mergeSort(param, left, middle);
+         mergeSort(param, middle + 1, right);
+         merge(param, left, middle, right);
+      }
+   }
+
+   private static void sortProcessesByBurstTime(Processes[] processes, int[] param) {
+      for (int i = 0; i < processes.length; i++) {
+         for (int j = 0; j < processes.length; j++) {
+            if (param[i] == processes[j].getBurstTime()) {
+               Processes aux = processes[i];
+               processes[i] = processes[j];
+               processes[j] = aux;
+            }
+         }
+      }
+   }
+
+   private static void sortProcessesByPriority(Processes[] processes, int[] param) {
+      for (int i = 0; i < processes.length; i++) {
+         for (int j = 0; j < processes.length; j++) {
+            if (param[i] == processes[j].getPriority()) {
+               Processes aux = processes[i];
+               processes[i] = processes[j];
+               processes[j] = aux;
+            }
+         }
+      }
+   }
+
 }
+
