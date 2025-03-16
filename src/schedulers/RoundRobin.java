@@ -1,7 +1,6 @@
 package schedulers;
 
-import java.util.List;
-
+import entities.ProcessControlBlock;
 import entities.Processes;
 import structures.queue.QueueList;
 
@@ -13,9 +12,19 @@ public class RoundRobin implements Scheduler {
    }
 
    @Override
-   public QueueList scheduler(Processes[] processes) {
-      QueueList queue = new QueueList(processes.length);
-      return queue;
+   public QueueList<Processes> scheduler(Processes[] processes) throws Exception {
+      QueueList<ProcessControlBlock> queue = new QueueList<ProcessControlBlock>(processes.length);
+      QueueList<Processes> readyQueue = new QueueList<Processes>(processes.length);
+
+      ProcessControlBlock[] pcb = new ProcessControlBlock[processes.length];
+      for (int i = 0; i < processes.length; i++) {
+         pcb[i] = new ProcessControlBlock(processes[i], processes[i].getBurstTime());
+         queue.add(pcb[i]);
+      }
+
+      
+
+      return readyQueue;
    }  
 }
 

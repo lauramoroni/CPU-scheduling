@@ -1,13 +1,11 @@
 package structures.queue;
 
-import entities.Processes;
-
-public class QueueList implements QueueInterface {
+public class QueueList<T> implements QueueInterface<T> {
     class Node{ // intern node class to implement linked list
-        Processes data;
+        T data;
         Node next;
 
-        public Node(Processes data){
+        public Node(T data){
             this.data = data;
             this.next = null;
         }
@@ -28,7 +26,7 @@ public class QueueList implements QueueInterface {
     }
 
     @Override
-    public void add(Processes p) throws Exception{
+    public void add(T p) throws Exception{
         Node newNode = new Node(p);
 
         // if the queue is full
@@ -48,7 +46,7 @@ public class QueueList implements QueueInterface {
     }
 
     @Override
-    public Processes remove() throws Exception {
+    public T remove() throws Exception {
         // storing the head node
         Node p = head;
 
@@ -57,7 +55,7 @@ public class QueueList implements QueueInterface {
         }
 
         // storing the data
-        Processes removeData = head.data;
+        T removeData = head.data;
 
         // removing the first element
         if (head == tail){
@@ -77,7 +75,7 @@ public class QueueList implements QueueInterface {
     }
 
     @Override
-    public Processes peek() throws Exception {
+    public T peek() throws Exception {
         if (isEmpty()){
             throw new Exception("The queue is empty");
         }

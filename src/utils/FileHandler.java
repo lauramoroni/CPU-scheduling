@@ -38,7 +38,7 @@ public class FileHandler {
         return null;
     }
 
-    public static void writeFile(String path, QueueList processes, String scheduler) {
+    public static void writeFile(String path, QueueList<Processes> processes, String scheduler) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write("Scheduler: " + scheduler);
             writer.newLine();

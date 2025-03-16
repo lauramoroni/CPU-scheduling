@@ -1,13 +1,11 @@
 package structures.queue;
 
-import entities.Processes;
+public interface QueueInterface <T> {
+    void add(T p) throws Exception;
 
-public interface QueueInterface {
-    void add(Processes p) throws Exception;
+    T remove() throws Exception;
 
-    Processes remove() throws Exception;
-
-    Processes peek() throws Exception;
+    T peek() throws Exception;
 
     boolean isEmpty();
 
