@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import entities.Processes;
+import schedulers.Priority;
 import schedulers.RoundRobin;
 import schedulers.SJF;
 import structures.queue.QueueList;
@@ -68,9 +69,20 @@ public class SchedulerSimulator {
                         System.out.println(Color.ANSI_RED + "Error writing file: " + e.getMessage() + Color.ANSI_RESET);
                     }
                     break;
-                    case 4:
+                case 4:
                     System.out.println("Priority");
+                    Priority priority = new Priority();
+                    readyProcesses = priority.scheduler(processes);
+                    readyProcesses.show();
+                    System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
+                    try {
+                        FileHandler.writeFile("tests\\output\\priority.txt", readyProcesses, "Priority");
+                        System.out.println(Color.ANSI_GREEN + "File written successfully!" + Color.ANSI_RESET);
+                    } catch (Exception e) {
+                        System.out.println(Color.ANSI_RED + "Error writing file: " + e.getMessage() + Color.ANSI_RESET);
+                    }
                     break;
+
                     case 5:
                     System.out.println(Color.ANSI_RED + "Exit the program" + Color.ANSI_RESET);
                     break;
