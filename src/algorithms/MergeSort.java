@@ -6,27 +6,15 @@ public class MergeSort {
 
    public static void mergeMain(Processes[] processes, String param) {
       if (param.equals("burstTime")) {
-         int[] burstTime = new int[processes.length];
-         for (int i = 0; i < processes.length; i++) {
-            burstTime[i] = processes[i].getBurstTime();
-         }
-         mergeSort(burstTime, 0, burstTime.length - 1);
+            mergeBurstTime(processes);
       } else if (param.equals("arrivalTime")) {
-         int[] arrivalTime = new int[processes.length];
-         for (int i = 0; i < processes.length; i++) {
-            arrivalTime[i] = processes[i].getArrivalTime();
-         }
-         mergeSort(arrivalTime, 0, arrivalTime.length - 1);
+            mergeArrivalTime(processes);
       } else if (param.equals("priority")) {
-         int[] priority = new int[processes.length];
-         for (int i = 0; i < processes.length; i++) {
-            priority[i] = processes[i].getPriority();
-         }
-         mergeSort(priority, 0, priority.length - 1);
+            mergePriority(processes);
       }
    }
 
-   public static void merge(int[] param, int left, int middle, int right) {
+   private static void merge(int[] param, int left, int middle, int right) {
       // transfere os elementos para um vetor auxiliar
       int[] aux = new int[param.length];
 
@@ -58,7 +46,7 @@ public class MergeSort {
       }
    }
 
-   public static void mergeSort(int[] param, int left, int right) {
+   private static void mergeSort(int[] param, int left, int right) {
       if (left >= right) {
          return;
       } else {
@@ -68,4 +56,43 @@ public class MergeSort {
          merge(param, left, middle, right);
       }
    }
+
+   private static void sortProcesses(Processes[] processes, int[] param) {
+      for (int i = 0; i < processes.length; i++) {
+         for (int j = 0; j < processes.length; j++) {
+            if (param[i] == processes[j].getBurstTime()) {
+               Processes aux = processes[i];
+               processes[i] = processes[j];
+               processes[j] = aux;
+            }
+         }
+      }
+   }
+
+   private static void mergeBurstTime(Processes[] processes){
+      int[] burstTime = new int[processes.length];
+      for (int i = 0; i < processes.length; i++) {
+         burstTime[i] = processes[i].getBurstTime();
+      }
+      mergeSort(burstTime, 0, burstTime.length - 1);
+      sortProcesses(processes, burstTime);
+   }
+
+   private static void mergePriority(Processes[] processes){
+      int[] priority = new int[processes.length];
+      for (int i = 0; i < processes.length; i++) {
+         priority[i] = processes[i].getBurstTime();
+      }
+      mergeSort(priority, 0, priority.length - 1);
+      sortProcesses(processes, priority);
+   }
+
+    private static void mergeArrivalTime(Processes[] processes){
+        int[] arrivalTime = new int[processes.length];
+        for (int i = 0; i < processes.length; i++) {
+           arrivalTime[i] = processes[i].getBurstTime();
+        }
+        mergeSort(arrivalTime, 0, arrivalTime.length - 1);
+        sortProcesses(processes, arrivalTime);
+    }
 }
