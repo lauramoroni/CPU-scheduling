@@ -44,9 +44,10 @@ public class SchedulerSimulator {
                     System.out.println("First Come First Serve");
                     break;
                 case 2:
-                System.out.println("Shortest Job First");
+                    System.out.println("Shortest Job First");
                     SJF sjf = new SJF();
                     readyProcesses = sjf.scheduler(processes);
+                    readyProcesses.show();
                     System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
                     try {
                         FileHandler.writeFile("tests\\output\\SJF.txt", readyProcesses, "SJF");
