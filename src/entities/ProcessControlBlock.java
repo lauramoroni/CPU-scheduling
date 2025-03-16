@@ -35,5 +35,7 @@ public class ProcessControlBlock {
       this.state = state;
    }
 
-   
+   public String toString() {
+      return "ProcessControlBlock{" + "process=" + process + ", remainingTime=" + remainingTime + ", state=" + state + '}';
+   }
 }

@@ -60,7 +60,9 @@ public class SchedulerSimulator {
                     break;
                 case 3:
                     System.out.println("Round Robin");
-                    RoundRobin rr = new RoundRobin(2);
+                    System.out.println("Quantum: ");
+                    int quantum = sc.nextInt();
+                    RoundRobin rr = new RoundRobin(quantum);
                     readyProcesses = rr.scheduler(processes);
                     System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
                     try {
