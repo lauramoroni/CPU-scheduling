@@ -7,7 +7,7 @@ import algorithms.MergeSort;
 
 public class SJF implements Scheduler{
 
-   public QueueList scheduler(Processes[] processes) throws Exception {
+   public QueueList<Processes> scheduler(Processes[] processes) throws Exception {
       // lista de tempo dos processos
       int[] burstTime = new int[processes.length];
       for (int i = 0; i < processes.length; i++) {
@@ -18,7 +18,7 @@ public class SJF implements Scheduler{
       MergeSort.mergeMain(processes, "burstTime");
 
       // criando a fila de processos prontos
-      QueueList queue = new QueueList(processes.length);
+      QueueList<Processes> queue = new QueueList<Processes>(processes.length);
       for (int i = 0; i < processes.length; i++) {
          queue.add(processes[i]);
       }

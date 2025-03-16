@@ -9,6 +9,7 @@ import utils.Color;
 import utils.FileHandler;
 
 public class SchedulerSimulator {
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         
@@ -22,7 +23,7 @@ public class SchedulerSimulator {
         Processes[] processes = FileHandler.readFile(path);
         
         System.out.println(Color.ANSI_PURPLE + "Loading processes..." + Color.ANSI_RESET);
-        QueueList readyProcesses = new QueueList(processes.length);
+        QueueList<Processes> readyProcesses = new QueueList<Processes>(processes.length);
         System.out.println(Color.ANSI_GREEN + "Processes loaded successfully!" + Color.ANSI_RESET);
         
         System.out.println(Color.ANSI_BLUE + "Starting scheduler..." + Color.ANSI_RESET);
@@ -59,7 +60,9 @@ public class SchedulerSimulator {
                     break;
                 case 3:
                     System.out.println("Round Robin");
-                    RoundRobin rr = new RoundRobin(2);
+                    System.out.println("Quantum: ");
+                    int quantum = sc.nextInt();
+                    RoundRobin rr = new RoundRobin(quantum);
                     readyProcesses = rr.scheduler(processes);
                     System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
                     try {
