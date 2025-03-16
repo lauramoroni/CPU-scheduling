@@ -64,6 +64,8 @@ public class QueueList implements QueueInterface {
             // removing the conection with the node
             head = null;
             tail = null;
+            size--;
+            return removeData;
         }
 
         head = head.next; // indicating that the head of the queue will be the next node
