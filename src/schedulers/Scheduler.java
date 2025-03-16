@@ -6,5 +6,5 @@ import entities.Processes;
 import structures.queue.QueueList;
 
 public interface Scheduler {
-   QueueList scheduler(List<Processes> processes) throws Exception;
+   QueueList scheduler(Processes[] processes) throws Exception;
 }
