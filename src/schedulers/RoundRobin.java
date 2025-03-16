@@ -13,8 +13,8 @@ public class RoundRobin implements Scheduler {
    }
 
    @Override
-   public QueueList scheduler(List<Processes> processes) {
-      QueueList queue = new QueueList(processes.size());
+   public QueueList scheduler(Processes[] processes) {
+      QueueList queue = new QueueList(processes.length);
       return queue;
    }  
 }
