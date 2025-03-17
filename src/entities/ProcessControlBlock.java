@@ -11,7 +11,7 @@ public class ProcessControlBlock {
       this.state = ProcessState.READY;
    }
 
-   public Processes getProcess(Processes processes) {
+   public Processes getProcess() {
       return process;
    }
 
