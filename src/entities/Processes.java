@@ -16,8 +16,12 @@ public class Processes {
   }
 
    public String toString() {
-       return "PID: " + id + "\nName: " + name + "\nArrival Time: " + arrivalTime + "\nBurst Time: " + burstTime + "\nPriority: " + priority + "\n";
+      return "PID: " + id + "\nName: " + name + "\nArrival Time: " + arrivalTime + "\nBurst Time: " + burstTime + "\nPriority: " + priority + "\n";
    }
+
+   public String toCSV() {
+      return id + "," + name + "," + arrivalTime + "," + burstTime + "," + priority;
+  }
 
    public int getPriority() {
       return priority;

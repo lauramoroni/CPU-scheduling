@@ -38,9 +38,26 @@ public class FileHandler {
         return null;
     }
 
-    public static void writeFile(String path, QueueList<Processes> processes, String scheduler) {
+    public static void writeFile(String path, QueueList<Processes> processes, String scheduler, int quantum) {
+        if (path.endsWith(".txt")) {
+            writeTxtFile(path, processes, scheduler, quantum);
+        } else if (path.endsWith(".csv")) {
+            writeCSVFile(path, processes, scheduler, quantum);
+        } else if (path.endsWith(".dat")) {
+            writeDatFile(path, processes, scheduler, quantum);
+        } else {
+            System.err.println(Color.ANSI_RED + "Invalid file format" + Color.ANSI_RESET);
+        }
+    }
+
+    public static void writeTxtFile(String path, QueueList<Processes> processes, String scheduler, int quantum) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write("Scheduler: " + scheduler);
+
+            if (scheduler.equals("Round Robin")) {
+                writer.write(" - Quantum: " + quantum);
+            }
+
             writer.newLine();
 
             while (!processes.isEmpty()) {
@@ -53,6 +70,50 @@ public class FileHandler {
             }
         } catch (IOException e) {
             System.err.println(Color.ANSI_RED + "Error writing to file: " + e.getMessage() + Color.ANSI_RESET);
+        } catch (Exception e) {
+            System.err.println(Color.ANSI_RED + "Error processing queue: " + e.getMessage() + Color.ANSI_RESET);
+        }
+    }
+
+    public static void writeCSVFile(String path, QueueList<Processes> processes, String scheduler, int quantum) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+            writer.write("ID,Name,Arrival Time,Burst Time,Priority,Quantum");
+            writer.newLine();
+
+            while (!processes.isEmpty()) {
+                Processes process = processes.remove();
+                writer.write(process.toCSV() + "," + quantum);
+                writer.newLine();
+
+                System.out.println(Color.ANSI_PURPLE + "Reading process " + process.getId() + Color.ANSI_RESET);
+                System.out.println(Color.ANSI_GREEN + "Process = " + process.getName() + " = written to file" + Color.ANSI_RESET);
+            }
+        } catch (IOException e) {
+            System.err.println(Color.ANSI_RED + "Error writing to file: " + e.getMessage() + Color.ANSI_RESET);
+        } catch (Exception e) {
+            System.err.println(Color.ANSI_RED + "Error processing queue: " + e.getMessage() + Color.ANSI_RESET);
+        }
+    }
+
+    public static void writeDatFile(String path, QueueList<Processes> processes, String scheduler, int quantum) {
+        try (FileOutputStream fileOut = new FileOutputStream(path);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+
+            objectOut.writeUTF(scheduler); 
+            
+            if (scheduler.equals("Round Robin")) {
+                objectOut.writeInt(quantum);   
+            }
+
+            while (!processes.isEmpty()) {
+                Processes process = processes.remove(); 
+                objectOut.writeObject(process);
+
+                System.out.println(Color.ANSI_PURPLE + "Reading process " + process.getId() + Color.ANSI_RESET);
+                System.out.println(Color.ANSI_GREEN + "Process = " + process.getName() + " = written to binary file" + Color.ANSI_RESET);
+            }
+        } catch (IOException e) {
+            System.err.println(Color.ANSI_RED + "Error writing to binary file: " + e.getMessage() + Color.ANSI_RESET);
         } catch (Exception e) {
             System.err.println(Color.ANSI_RED + "Error processing queue: " + e.getMessage() + Color.ANSI_RESET);
         }
