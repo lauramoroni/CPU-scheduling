@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import entities.Processes;
+import schedulers.FIFO;
 import schedulers.Priority;
 import schedulers.RoundRobin;
 import schedulers.SJF;
@@ -44,6 +45,15 @@ public class SchedulerSimulator {
             switch (option) {
                 case 1:
                     System.out.println("First Come First Serve");
+                    FIFO fifo = new FIFO();
+                    readyProcesses = fifo.scheduler(processes);
+                    System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
+                    try {
+                        FileHandler.writeFile("tests\\output\\SJF.txt", readyProcesses, "FIFO");
+                        System.out.println(Color.ANSI_GREEN + "File written successfully!" + Color.ANSI_RESET);
+                    } catch (Exception e) {
+                        System.out.println(Color.ANSI_RED + "Error writing file: " + e.getMessage() + Color.ANSI_RESET);
+                    }
                     break;
                 case 2:
                     System.out.println("Shortest Job First");
