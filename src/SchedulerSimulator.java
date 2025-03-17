@@ -49,7 +49,6 @@ public class SchedulerSimulator {
                     System.out.println("Shortest Job First");
                     SJF sjf = new SJF();
                     readyProcesses = sjf.scheduler(processes);
-                    readyProcesses.show();
                     System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
                     try {
                         FileHandler.writeFile("tests\\output\\SJF.txt", readyProcesses, "SJF");
@@ -76,7 +75,6 @@ public class SchedulerSimulator {
                     System.out.println("Priority");
                     Priority priority = new Priority();
                     readyProcesses = priority.scheduler(processes);
-                    readyProcesses.show();
                     System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
                     try {
                         FileHandler.writeFile("tests\\output\\priority.txt", readyProcesses, "Priority");
