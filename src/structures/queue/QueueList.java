@@ -24,7 +24,20 @@ public class QueueList<T> implements QueueInterface<T> {
         this.size = 0;
         this.capacity = capacity;
     }
+    public T getNext(T p) {
+        Node current = head;
 
+        //
+        while( current.next != null )
+        {
+            if( current.data.equals(p) ) {
+                return current.next.data;
+            }
+            current = current.next;
+        }
+
+        return null; // Retorna null se o elemento não for encontrado
+    }
     @Override
     public void add(T p) throws Exception{
         Node newNode = new Node(p);
