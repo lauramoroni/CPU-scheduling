@@ -1,5 +1,5 @@
 package entities;
 
 public enum ProcessState {
-   NEW, READY, RUNNING, WAITING, TERMINATED
+   READY, RUNNING, TERMINATED
 }

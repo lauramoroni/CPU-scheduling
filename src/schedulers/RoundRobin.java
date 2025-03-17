@@ -1,6 +1,7 @@
 package schedulers;
 
 import entities.ProcessControlBlock;
+import entities.ProcessState;
 import entities.Processes;
 import structures.queue.QueueList;
 import utils.Color;
@@ -41,6 +42,7 @@ public class RoundRobin implements Scheduler {
 
       while (!queue.isEmpty()) {
          ProcessControlBlock p = queue.remove();
+         p.setState(ProcessState.RUNNING);
          int processIndex = p.getProcess().getId() - 1;
          int executionTime = Math.min(p.getRemainingTime(), quantum);
 
@@ -52,8 +54,10 @@ public class RoundRobin implements Scheduler {
          p.setRemainingTime(p.getRemainingTime() - executionTime);
 
          if (p.getRemainingTime() > 0) {
-            queue.add(p); //
+            p.setState(ProcessState.READY);
+            queue.add(p); 
          } else {
+            p.setState(ProcessState.TERMINATED);
             readyQueue.add(p.getProcess());
          }
       }
