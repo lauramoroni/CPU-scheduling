@@ -77,7 +77,10 @@ public class FileHandler {
     }
 
     public static void writeTxtFile(String path, QueueList<Processes> processes, String scheduler, int quantum) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+        try {
+            File file = new File(path);
+            file.getParentFile().mkdirs();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             writer.write("Scheduler: " + scheduler);
 
             if (scheduler.equals("Round Robin")) {
@@ -94,6 +97,9 @@ public class FileHandler {
                 System.out.println(Color.ANSI_PURPLE + "Reading process " + process.getId() + Color.ANSI_RESET);
                 System.out.println(Color.ANSI_GREEN + "Process = " + process.getName() + " = written to file" + Color.ANSI_RESET);
             }
+
+            writer.close();
+            
         } catch (IOException e) {
             System.err.println(Color.ANSI_RED + "Error writing to file: " + e.getMessage() + Color.ANSI_RESET);
         } catch (Exception e) {

@@ -35,14 +35,9 @@ public static void main(String[] args) throws Exception {
       System.out.println(Color.ANSI_BLUE + "Starting scheduler..." + Color.ANSI_RESET);
 
       int option = 0;
+      int formatOption = 0;
 
       while (option != 5) {
-
-         System.out.println("[1] .txt");
-         System.out.println("[2] .csv");
-         System.out.println("Choose format output file:");
-
-         int formatOption = Integer.parseInt(System.console().readLine());
 
          System.out.println("CPU Scheduler Simulator");
          System.out.println("[1] First Come First Serve");
@@ -54,6 +49,14 @@ public static void main(String[] args) throws Exception {
 
          option = Integer.parseInt(System.console().readLine());
 
+         if (option != 5) {
+            System.out.println("[1] .txt");
+            System.out.println("[2] .csv");
+            System.out.println("Choose format output file:");
+
+            formatOption = Integer.parseInt(System.console().readLine());
+         }
+
          String format = "";
          if (formatOption == 1) {
             format = ".txt";
@@ -63,10 +66,21 @@ public static void main(String[] args) throws Exception {
             System.out.println(Color.ANSI_RED + "Invalid option" + Color.ANSI_RESET);
          }
          
-
          switch (option) {
             case 1:
                System.out.println("First Come First Serve");
+
+               FIFO fifo = new FIFO();
+               readyProcesses = fifo.scheduler(processes);
+
+               System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
+
+               try {
+                  FileHandler.writeFile("tests\\output\\FIFO" + format, readyProcesses, "FIFO", 0);
+                  System.out.println(Color.ANSI_GREEN + "File written successfully!" + Color.ANSI_RESET);
+               } catch (Exception e) {
+                  System.out.println(Color.ANSI_RED + "Error writing file: " + e.getMessage() + Color.ANSI_RESET);
+               }
                break;
             case 2:
                System.out.println("Shortest Job First");
