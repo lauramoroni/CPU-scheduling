@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import entities.Processes;
+import schedulers.FIFO;
 import schedulers.Priority;
 import schedulers.RoundRobin;
 import schedulers.SJF;
@@ -9,6 +10,7 @@ import utils.Color;
 import utils.FileHandler;
 
 public class SchedulerSimulator {
+
 @SuppressWarnings({ "unchecked", "unused" })
 public static void main(String[] args) throws Exception {
       Scanner sc = new Scanner(System.in);
