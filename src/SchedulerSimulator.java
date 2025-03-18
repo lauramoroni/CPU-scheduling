@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 import entities.Processes;
-import schedulers.FIFO;
+import schedulers.FCFS;
 import schedulers.Priority;
 import schedulers.RoundRobin;
 import schedulers.SJF;
@@ -68,15 +68,15 @@ public static void main(String[] args) throws Exception {
             case 1:
                System.out.println("First Come First Serve");
 
-               FIFO fifo = new FIFO();
-               readyProcesses = fifo.scheduler(processes);
+               FCFS fcfs = new FCFS();  
+               readyProcesses = fcfs.scheduler(processes);
 
                System.out.println(Color.ANSI_PURPLE + "Writing to file..." + Color.ANSI_RESET);
 
                try {
-                  FileHandler.writeFile("tests\\output\\FIFO" + format, readyProcesses, "FIFO", 0);
+                  FileHandler.writeFile("tests\\output\\FCFS" + format, readyProcesses, "FCFS", 0); 
                   System.out.println(Color.ANSI_GREEN + "File written successfully!" + Color.ANSI_RESET);
-               } catch (Exception e) {
+               } catch (Exception e) { 
                   System.out.println(Color.ANSI_RED + "Error writing file: " + e.getMessage() + Color.ANSI_RESET);
                }
                break;
