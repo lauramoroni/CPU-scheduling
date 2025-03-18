@@ -24,8 +24,6 @@ public static void main(String[] args) throws Exception {
 
       System.out.println(Color.ANSI_PURPLE + "Reading file..." + Color.ANSI_RESET);
       Processes[] processes = FileHandler.readFile(path);
-
-      processes[0].toString();
       
       System.out.println(Color.ANSI_PURPLE + "Loading processes..." + Color.ANSI_RESET);
       QueueList<Processes> readyProcesses = new QueueList<Processes>(processes.length);

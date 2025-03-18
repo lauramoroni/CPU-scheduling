@@ -16,10 +16,6 @@ public class FIFO implements Scheduler {
         // ordenando os processos pela prioridade
         MergeSort.mergeMain(processes, "arrivalTime");
 
-        for (Processes process : processes) {
-            System.out.println(process);
-        }
-
         // criando a fila de processos prontos
         QueueList<Processes> queue = new QueueList<Processes>(processes.length);
         for (int i = 0; i < processes.length; i++) {

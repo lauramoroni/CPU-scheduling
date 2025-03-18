@@ -3,7 +3,6 @@ package schedulers;
 import entities.Processes;
 import structures.queue.QueueList;
 import algorithms.MergeSort;
-import utils.Color;
 
 import static utils.GanttDiagram.diagram;
 
