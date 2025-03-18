@@ -7,9 +7,9 @@ package views;
 import javax.swing.JOptionPane;   
 import entities.*; 
 import schedulers.*; 
-import structures.*;
 import structures.queue.QueueList;
-import utils.*;  
+import utils.*;
+
 
   
 public class TelaEndereço extends javax.swing.JFrame {
@@ -210,7 +210,18 @@ public class TelaEndereço extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException {
+        // Printar no terminal antes de exibir a tela
+        Thread.sleep(1000);
+        System.out.println(Color.ANSI_BLUE + "\n" +
+                "   _____      _              _       _           _             \n" +
+                "  / ____|    | |            | |     | |         | |            \n" +
+                " | (___   ___| |__   ___  __| |_   _| |     __ _| |_ ___  _ __ \n" +
+                "  \\___ \\ / __| '_ \\ / _ \\/ _` | | | | |    / _` | __/ _ \\| '__|\n" +
+                "  ____) | (__| | | |  __/ (_| | |_| | |___| (_| | || (_) | |   \n" +
+                " |_____/ \\___|_| |_|\\___|\\__,_|\\__,_|______\\__,_|\\__\\___/|_|   \n" +
+                "                                                               " + Color.ANSI_RESET);
+        Thread.sleep(1000);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
